@@ -30,6 +30,12 @@ public class DoctorAvailability {
     @Column(name = "reason")
     private String reason;
 
+    public void setDoctorId(Integer doctorId) {
+    }
+
+    public void setId(Integer availabilityId) {
+    }
+
     public enum Status {
         AVAILABLE,
         UNAVAILABLE
