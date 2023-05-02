@@ -3,7 +3,7 @@ package com.doctoravailabilityservice.doctoravailabilityservice.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "doctor_managment")
+@Table(name = "doctor")
 
 public class DoctorAvailability {
 
