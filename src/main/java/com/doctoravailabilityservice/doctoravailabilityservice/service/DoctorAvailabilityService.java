@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class DoctorAvailabilityService {
 
-
+    @Autowired
     private DoctorAvailabilityRepository doctorAvailabilityRepository;
 
     public DoctorAvailability createAvailability(DoctorAvailability doctorAvailability) {
