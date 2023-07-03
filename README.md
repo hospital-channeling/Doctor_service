@@ -55,6 +55,31 @@ spring.jpa.show-sql=true
 | PUT    | `/doctors/{doctorId}/availability/{id}` | Update doctor availability             |
 | DELETE | `/doctors/{doctorId}/availability/{id}` | Delete doctor availability             |
 
+## Code Summary
+
+### `DoctorAvailabilityController`
+
+This is where you handle incoming HTTP requests. You define endpoints here like `GET /doctors/{doctorId}/availability` and you'll use the `DoctorAvailabilityService` to perform operations based on these requests.
+
+### `DoctorAvailability` (in entity package)
+
+This is an entity class, which Hibernate (the ORM used by Spring Data JPA) will use to create the `doctor_availability` table in the MySQL database.
+
+### `DoctorAvailabilityRepository` (in repository package)
+
+This is a Spring Data JPA repository for `DoctorAvailability`. Spring will automatically implement this interface in a bean that has the same name but starting with a lowercase letter (i.e., `doctorAvailabilityRepository`).
+
+### `DoctorAvailabilityService` (in service package)
+
+This is an interface that defines the operations you can perform on `DoctorAvailability` entities.
+
+### `DoctorAvailabilityServiceImpl` (in service package)
+
+This class implements `DoctorAvailabilityService`, using `DoctorAvailabilityRepository` to interact with the database.
+
+
+
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
