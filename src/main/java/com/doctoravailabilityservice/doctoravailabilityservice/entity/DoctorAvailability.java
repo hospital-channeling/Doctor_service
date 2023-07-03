@@ -2,32 +2,28 @@ package com.doctoravailabilityservice.doctoravailabilityservice.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 @Entity
-@Table(name = "doctor")
-
+@Table(name = "doctor_availability")
 public class DoctorAvailability {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "doctor_id", nullable = false)
+    @Column(name = "doctor_id")
     private Integer doctorId;
 
-    @Column(name = "availability_date", nullable = false)
-    private LocalDate availabilityDate;
+    @Column(name = "doc_date")
+    private String docDate;
 
-    @Column(name = "start_time", nullable = false)
-    private LocalTime startTime;
+    @Column(name = "start_time")
+    private String startTime;
 
-    @Column(name = "end_time", nullable = false)
-    private LocalTime endTime;
+    @Column(name = "end_time")
+    private String endTime;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
+    @Column(name = "status")
     private Status status;
 
     @Column(name = "reason")
@@ -47,15 +43,15 @@ public class DoctorAvailability {
         return doctorId;
     }
 
-    public LocalDate getAvailabilityDate() {
-        return availabilityDate;
+    public String getDocDate() {
+        return docDate;
     }
 
-    public LocalTime getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public LocalTime getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
@@ -76,15 +72,15 @@ public class DoctorAvailability {
         this.doctorId = doctorId;
     }
 
-    public void setAvailabilityDate(LocalDate availabilityDate) {
-        this.availabilityDate = availabilityDate;
+    public void setDocDate(String docDate) {
+        this.docDate = docDate;
     }
 
-    public void setStartTime(LocalTime startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
@@ -95,6 +91,4 @@ public class DoctorAvailability {
     public void setReason(String reason) {
         this.reason = reason;
     }
-
-
 }

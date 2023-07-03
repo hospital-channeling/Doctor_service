@@ -8,12 +8,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("/doctors/{doctorId}/availability")
 public class DoctorAvailabilityController {
 
+    private final DoctorAvailabilityService doctorAvailabilityService;
+
     @Autowired
-    private DoctorAvailabilityService doctorAvailabilityService;
+    public DoctorAvailabilityController(DoctorAvailabilityService doctorAvailabilityService) {
+        this.doctorAvailabilityService = doctorAvailabilityService;
+    }
 
     @PostMapping
     public ResponseEntity<DoctorAvailability> createAvailability(@PathVariable Integer doctorId,
@@ -26,16 +31,18 @@ public class DoctorAvailabilityController {
     @GetMapping
     public ResponseEntity<List<DoctorAvailability>> getAvailabilities(@PathVariable Integer doctorId) {
         List<DoctorAvailability> availabilities = doctorAvailabilityService.getAvailabilitiesByDoctorId(doctorId);
-        return availabilities.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT) :
-                new ResponseEntity<>(availabilities, HttpStatus.OK);
+        return new ResponseEntity<>(availabilities, HttpStatus.OK);
     }
 
     @GetMapping("/{availabilityId}")
     public ResponseEntity<DoctorAvailability> getAvailabilityById(@PathVariable Integer doctorId,
                                                                   @PathVariable Integer availabilityId) {
-        return doctorAvailabilityService.getAvailabilityById(availabilityId)
-                .map(availability -> new ResponseEntity<>(availability, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if (!doctorAvailabilityService.existsById(availabilityId)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        DoctorAvailability availability = doctorAvailabilityService.getAvailabilityById(availabilityId)
+                .orElseThrow();
+        return new ResponseEntity<>(availability, HttpStatus.OK);
     }
 
     @PutMapping("/{availabilityId}")
